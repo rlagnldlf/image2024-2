@@ -6,7 +6,27 @@ import matplotlib.pylab as plt
 # 127로 중간숫자를 고정
 img = cv2.imread('./img/gray_gradient.jpg', cv2.IMREAD_GRAYSCALE)
 thresh_np = np.zeros_like(img)
-thresh_np[img > 127] = 255
+thresh_np[img > 171] = 255
+thresh_np[(128<img) & (img<171)] = 128
+thresh_np[(64 < img) & (img < 128)] = 64
+#두번째 방법
+thresh_np = np.zeros_like(img)
+thresh_np[img > 64] = 64
+thresh_np[img > 128] = 128
+thresh_np[img > 171] = 255
+print('img', img)
+# 세번째 방법
+thresh_np = np.zeros_like(img)
+ysize, xsize = img.shape
+for x in range(xsize):
+    for y in range(ysize):
+        if(img[y,x] > 64):
+            thresh_np[y,x] = 64
+        if (img[y, x] > 128):
+            thresh_np[y, x] = 128
+        if(img[y,x] > 171):
+            thresh_np[y,x] = 255
+
 _, thresh_cv = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 
 cv2.imshow('thr', thresh_np)
