@@ -1,10 +1,16 @@
+## 10-21 이미지 분석 과제
+# 얼굴(네모에서 > 원or타원으로 바꾸기, 파란색)
+# 눈(네모, 초록)
+# 사진 밑에 내 이름 글씨 추가하기 ex) 김휘일 중간과제
+
+
 import cv2
 import numpy as np
 from cv2.data import haarcascades
 
 face_cascade = cv2.CascadeClassifier('./recdata/haarcascade_frontalface_default.xml')
 eye_cascade = cv2.CascadeClassifier('./recdata/haarcascade_eye.xml')
-img = cv2.imread('./img/graduate.jpg')
+img = cv2.imread('./img/smilings.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 faces = face_cascade.detectMultiScale(gray)
 for i in range(len(faces)):
